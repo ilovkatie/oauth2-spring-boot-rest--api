@@ -1,0 +1,66 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create account table" author="Kacper Klepacz">
+        <createTable tableName="account">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create role table" author="Kacper Klepacz">
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create account_role table" author="Kacper Klepacz">
+        <createTable tableName="account_role">
+            <column name="user_id" type="bigint">
+                <constraints primaryKey="true" foreignKeyName="fk_user_id" references="account(id)" nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints primaryKey="true" foreignKeyName="fk_role_id" references="role(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert startup accounts" author="Kacper Klepacz">
+        <loadData encoding="UTF-8"
+                  file="db/changelog/data/account.csv"
+                  separator=","
+                  tableName="account">
+            <column name="login" type="STRING"/>
+            <column name="password" type="STRING"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="db/changelog/data/role.csv"
+                  separator=","
+                  tableName="role">
+            <column name="name" type="STRING"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="db/changelog/data/account_role.csv"
+                  separator=","
+                  tableName="account_role">
+            <column name="user_id" type="NUMERIC"/>
+            <column name="role_id" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
