@@ -1,6 +1,6 @@
 # OAuth2-REST-API
 
-**Frameworks used**
+## Frameworks used
 
 - Spring Boot 1.5.2 (Security, Web, JPA, acurator)
 - Hibernate 5.2.5 Final
@@ -9,13 +9,24 @@
 - Postgres/H2 drivers
 - ModelMapper 0.7.5
 
-**Config** 
+### Config
 
 Java Config + .properties files per environment
 
-**Features**
+## Usage
+
+Run with Maven:
+
+```
+mvn clean install spring-boot:run -Dspring.profiles.active=local
+```
+
+You can replace "local" with "unit-tests" for H2 database usage.
+
+## Features
 - OAuth2 secured API
 - Database schema management with Liquibase (both Postgres/H2)
 - Hibernate validation
 - Properties per environment 
 - ModelMapper for DTO objects
+
