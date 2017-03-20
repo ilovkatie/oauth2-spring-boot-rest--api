@@ -54,11 +54,20 @@ public class OAuth2 {
     @ComponentScan
     public static class ResourceServer extends ResourceServerConfigurerAdapter {
 
+        @Autowired
+        private RoleHierarchy roleHierarchy;
+
+        private SecurityExpressionHandler<FilterInvocation> webExpressionHandler() {
+            OAuth2WebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new OAuth2WebSecurityExpressionHandler();
+            defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy);
+            return defaultWebSecurityExpressionHandler;
+        }
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http
-                    .authorizeRequests()
-                    .antMatchers("/api/**").authenticated()
+                    .authorizeRequests().expressionHandler(webExpressionHandler())
+                    .antMatchers("/api/**").hasRole("DEVELOPER")
                     .antMatchers("/h2/**").permitAll();
         }
     }
