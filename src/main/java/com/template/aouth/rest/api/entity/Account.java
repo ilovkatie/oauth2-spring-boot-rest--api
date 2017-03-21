@@ -18,7 +18,7 @@ public class Account implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String login;
+    private String username;
     @Column(nullable = false)
     private String password;
     @JoinTable(name = "account_role",
@@ -35,12 +35,8 @@ public class Account implements Serializable, UserDetails {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -55,7 +51,7 @@ public class Account implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override
@@ -83,6 +79,9 @@ public class Account implements Serializable, UserDetails {
     }
 
     public Set<Role> getRoles() {
+        if(roles == null){
+            return new HashSet<>();
+        }
         return roles;
     }
 
@@ -97,7 +96,7 @@ public class Account implements Serializable, UserDetails {
 
         Account account = (Account) o;
 
-        if (login != null ? !login.equals(account.login) : account.login != null) return false;
+        if (username != null ? !username.equals(account.username) : account.username != null) return false;
         if (password != null ? !password.equals(account.password) : account.password != null) return false;
         return roles != null ? roles.equals(account.roles) : account.roles == null;
 
@@ -105,7 +104,7 @@ public class Account implements Serializable, UserDetails {
 
     @Override
     public int hashCode() {
-        int result = login != null ? login.hashCode() : 0;
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         return result;

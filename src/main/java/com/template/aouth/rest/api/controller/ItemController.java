@@ -5,7 +5,7 @@ import com.template.aouth.rest.api.dto.ItemListDto;
 import com.template.aouth.rest.api.dto.DtoMapper;
 import com.template.aouth.rest.api.entity.Item;
 import com.template.aouth.rest.api.service.ItemService;
-import com.template.aouth.rest.api.service.repository.ResultPage;
+import com.template.aouth.rest.api.repository.ResultPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(value = "api/items", produces = {"application/json"})
 @RestController
-public class ItemsResource {
+public class ItemController {
 
     private ItemService itemService;
     private DtoMapper dtoMapper;
 
     @Autowired
-    public ItemsResource(ItemService itemService, DtoMapper dtoMapper) {
+    public ItemController(ItemService itemService, DtoMapper dtoMapper) {
         this.itemService = itemService;
         this.dtoMapper = dtoMapper;
     }

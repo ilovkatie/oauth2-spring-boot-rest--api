@@ -35,6 +35,9 @@ public class Role implements Serializable, GrantedAuthority {
     }
 
     public Set<Account> getAccounts() {
+        if(accounts == null){
+            return new HashSet<>();
+        }
         return accounts;
     }
 

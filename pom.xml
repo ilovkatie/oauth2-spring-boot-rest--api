@@ -17,7 +17,7 @@
         <hibernate.version>5.2.5.Final</hibernate.version>
         <postgres.version>9.4.1212</postgres.version>
         <spring-security-oauth.version>2.1.0.RELEASE</spring-security-oauth.version>
-        <liquidbase.version>3.5.3</liquidbase.version>
+        <liquibase.version>3.5.3</liquibase.version>
         <modelmapper.version>0.7.5</modelmapper.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -64,6 +64,20 @@
             <version>${postgres.version}</version>
         </dependency>
         <!-- Presentation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>

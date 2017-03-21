@@ -1,4 +1,4 @@
-package com.template.aouth.rest.api.service.repository;
+package com.template.aouth.rest.api.repository;
 
 
 import com.template.aouth.rest.api.entity.Item;
